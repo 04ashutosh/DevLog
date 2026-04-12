@@ -5,6 +5,7 @@ import DashboardPage from "./pages/DashboardPage";
 import CreateLogPage from './pages/CreateLogPage';
 import ProjectsPage from './pages/ProjectsPage';
 import './styles/globals.css';
+import AnalyticsPage from './pages/AnalyticsPage';
 
 function App(){
   return (
@@ -14,6 +15,7 @@ function App(){
           <Route path="/" element={<DashboardPage />} />
           <Route path="/add-log" element={<CreateLogPage />}/>
           <Route path="/projects" element={<ProjectsPage />}/>
+          <Route path="/analytics" element={<AnalyticsPage />}/>
         </Routes>
       </MainLayout>
     </Router>
