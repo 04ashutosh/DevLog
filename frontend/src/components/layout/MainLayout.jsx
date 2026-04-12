@@ -1,17 +1,10 @@
 import React from "react";
+import Sidebar from './Sidebar';
 
 const MainLayout = ({children}) => {
     return (
-        <div className="main-layout">
-            <aside className="sidebar">
-                <nav>
-                    <ul>
-                        <li>Dashboard</li>
-                        <li>Add Log</li>
-                        <li>Projects</li>
-                    </ul>
-                </nav>
-            </aside>
+        <div className="app-container">
+            <Sidebar />
             <main className="content">
                 {children}
             </main>
