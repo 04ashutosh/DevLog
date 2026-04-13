@@ -14,7 +14,7 @@ const AnalyticsPage = () => {
         <div className="analytics-page">
             <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <h1>Productivity Insights</h1>
-                <Button onClick={analyticService.downloadCsv}>Export to CSV</Button>
+                <Button onClick={analyticsService.downloadCsv}>Export to CSV</Button>
             </header>
 
             <div className="stats-grid" style={{ marginTop: '2rem', display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(250px,1fr))', gap: '1.5rem' }}>

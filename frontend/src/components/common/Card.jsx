@@ -1,11 +1,11 @@
 import React from "react";
 
-const Card = ({children, title, substitle}) => {
+const Card = ({ children, title, subtitle }) => {
     return (
         <div className="glass-card"> 
             {title && <div className="card-header">
                 <h3>{title}</h3>
-                {substitle && <p className="text-muted">{substitle}</p>}    
+                {subtitle && <p className="text-muted">{subtitle}</p>}    
             </div>}
             <div className="card-body">
                 {children}

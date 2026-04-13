@@ -8,10 +8,10 @@ import Card from '../components/common/Card';
 const CreateLogPage = () => {
     const navigate = useNavigate();
     const [projects, setProjects] = useState([]);
-    const [log, setLog] = useState({ logDate: new Date().toISOString.split('T')[0], summary: '', workItems: [] });
+    const [log, setLog] = useState({ logDate: new Date().toISOString().split('T')[0], summary: '', workItems: [] });
 
     useEffect(() => {
-        projectService.getAll().then(res => setProjects(res.data));
+        projectService.getAll().then(res => setProjects(res.data)).catch(() => {});
     }, []);
 
     const addWorkItem = () => {
@@ -22,6 +22,13 @@ const CreateLogPage = () => {
         const newItems = [...log.workItems];
         newItems[index][field] = value;
         setLog({ ...log, workItems: newItems });
+    };
+
+    const removeWorkItem = (index) => {
+        if (window.confirm('Remove this work item?')) {
+            const newItems = log.workItems.filter((_, i) => i !== index);
+            setLog({ ...log, workItems: newItems });
+        }
     };
 
     const handleSubmit = (e) => {
@@ -50,18 +57,38 @@ const CreateLogPage = () => {
                             </select>
                             <input placeholder="Task title" value={item.title} onChange={e => handleWorkItemChange(index, 'title', e.target.value)} required />
                             <input type="number" placeholder="Mins" value={item.durationMinutes} onChange={e => handleWorkItemChange(index, 'durationMinutes', e.target.value)} required />
+                            <button
+                                type="button"
+                                onClick={() => removeWorkItem(index)}
+                                style={{
+                                    background: 'transparent',
+                                    border: '1px solid var(--glass-border)',
+                                    color: '#ff6b6b',
+                                    borderRadius: '6px',
+                                    padding: '0 0.75rem',
+                                    cursor: 'pointer',
+                                    fontSize: '1.1rem',
+                                    flexShrink: 0,
+                                    transition: 'all 0.2s'
+                                }}
+                                title="Remove this item"
+                            >
+                                ×
+                            </button>
                         </div>
                     ))}
-                    <Button onClick={addWorkItem} variant="secondary" type="button">
-                        + Add Item
-                    </Button>
-                    <Button type="submit">
-                        Submit Day Log
-                    </Button>
+                    <div style={{ display: 'flex', gap: '0.75rem', marginTop: '1rem' }}>
+                        <Button onClick={addWorkItem} variant="secondary" type="button">
+                            + Add Item
+                        </Button>
+                        <Button type="submit">
+                            Submit Day Log
+                        </Button>
+                    </div>
                 </div>
             </form>
         </Card>
     );
 };
 
-export default CreateLogPage;
+export default CreateLogPage;

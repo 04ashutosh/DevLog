@@ -2,6 +2,7 @@ package com.devlog.api.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.UUID;
 
 @Entity @Table(name="work_items")
@@ -11,6 +12,7 @@ public class WorkItem {
     private UUID id;
 
     @ManyToOne @JoinColumn(name = "log_entry_id")
+    @JsonIgnoreProperties("workItems")
     private LogEntry logEntry;
 
     @ManyToOne @JoinColumn(name = "project_id")

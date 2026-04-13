@@ -6,9 +6,11 @@ import Card from "../components/common/Card";
 const DashboardPage = () => {
     const [logs, setLogs] = useState([]);
 
-    useEffect(()=>{
-        logService.getAll().then(res=>setLogs(res.data));
-    },[]);
+    useEffect(() => {
+        logService.getAll()
+            .then(res => { if (Array.isArray(res.data)) setLogs(res.data); })
+            .catch(() => {});
+    }, []);
 
     return (
         <div className="dashboard">
